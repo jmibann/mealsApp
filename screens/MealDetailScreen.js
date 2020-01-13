@@ -3,6 +3,9 @@ import React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
 const MealDetailScreen = props => {
+
+  const mealId = props.navigation.getParam('mealId');
+
   return (
     <View style={styles.screen}>
       <Text>The Meal Detail Screen!</Text>
