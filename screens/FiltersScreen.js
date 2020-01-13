@@ -3,12 +3,20 @@ import { StyleSheet, View, Text } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import Colors from '../constants/Colors';
-import HeaderButton from '../components/HeaderButton'
+import HeaderButton from '../components/HeaderButton';
+
+import JoyagesButton from '../components/JoyagesButton'
 
 const FilterScreen = props => {
   return (
     <View style={styles.screen}>
       <Text>The Filter Screen!</Text>
+      <JoyagesButton
+        isWorking={false}
+        text='SIGN IN'
+        onPress={() => console.log('button pressed')}
+        solid={true}
+      />
     </View>
   )
 
