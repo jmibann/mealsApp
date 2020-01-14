@@ -15,7 +15,7 @@ const FilterScreen = props => {
         isWorking={false}
         text='SIGN IN'
         onPress={() => console.log('button pressed')}
-        solid={true}
+        solid={false}
       />
     </View>
   )
