@@ -4,6 +4,9 @@ import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'rea
 
 import Colors from '../constants/Colors';
 
+const HEIGHT = 50;
+const WIDTH = '80%';
+
 const JoyagesButton = props => {
 
   const textOrActivity = (isWorking, text) => {
@@ -16,7 +19,7 @@ const JoyagesButton = props => {
 
   return (
     <View style={styles.buttonContainer}>
-      <TouchableOpacity onPress={props.onPress}>
+      <TouchableOpacity onPress={props.onPress} activeOpacity={0.8}>
         <View style={props.solid ? styles.solidContent : styles.emptyContent}>
           {textOrActivity(props.isWorking, props.text)}
         </View>
@@ -29,25 +32,25 @@ const styles = StyleSheet.create({
   buttonContainer: {
     borderWidth: 1,
     borderColor: "#8A2CC6",
-    borderRadius: 100,
-    width: 200,
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden'
+    borderRadius: HEIGHT / 2,
+    width: WIDTH,
+    height: HEIGHT,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // overflow: 'hidden'
   },
   solidContent: {
-    width: 200,
-    height: 100,
-    borderRadius: 100,
+    width: '100%',
+    height: '100%',
+    borderRadius: HEIGHT / 2,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: "#8A2CC6"
   },
   emptyContent: {
-    width: 200,
-    height: 100,
-    borderRadius: 100,
+    width: '50%',
+    height: '100%',
+    borderRadius: HEIGHT / 2,
     alignItems: 'center',
     justifyContent: 'center',
   }
