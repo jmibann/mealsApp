@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import { StyleSheet, View, Text, Button, ScrollView, Image } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
+import { } from '../store/actions/meal';
 
 const ListItem = (props) => {
   return (
@@ -22,6 +23,17 @@ const MealDetailScreen = props => {
   const mealId = props.navigation.getParam('mealId');
 
   const selectedMeal = availableMeals.find(meal => meal.id = mealId);
+
+  const dispatch = useDispatch();
+
+  const toggleFavouriteHandler = useCallback(() => {
+    dispatch(toggleFavourite(mealId));
+  }, [dispatch, mealId])
+
+  useEffect(() => {
+    // props.navigation.setParams({ mealTitle: selectedMeal.title })
+    props.navigation.setParams({ toggleFav: toggleFavouriteHandler })
+  }, [toggleFavouriteHandler]);
 
   return (
     <ScrollView>
@@ -57,14 +69,16 @@ const MealDetailScreen = props => {
 };
 
 MealDetailScreen.navigationOptions = navigationData => {
-  const mealId = navigationData.navigation.getParam('mealId');
-  const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  // const mealId = navigationData.navigation.getParam('mealId');
+  const mealTitle = navigationData.navigation.getParam('mealTitle');
+  const toggleFavourite = navigationData.navigation.getParam('toggleFav')
+  // const selectedMeal = MEALS.find(meal => meal.id === mealId);
 
   return {
-    headerTitle: selectedMeal.title,
+    headerTitle: mealTitle,
     headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
-      <Item title='Favourite' iconName='ios-star' onPress={() => { console.log('mark as favourite') }} />
-    </HeaderButtons>
+      <Item title='Favourite' iconName='ios-star' onPress={toggleFavourite} />
+    </HeaderButtons>,
   };
 };
 

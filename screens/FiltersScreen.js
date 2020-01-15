@@ -37,6 +37,7 @@ const FilterScreen = props => {
       lactoseFree: isLactoseFree,
       glutenFree: isGlutenFree
     }
+
   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian])
 
   useEffect(() => {

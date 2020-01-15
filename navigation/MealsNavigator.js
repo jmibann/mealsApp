@@ -19,7 +19,12 @@ const stackNavOptions = {
   // initialRouteName: 'Categories',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : ''
+      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+      shadowRadius: 15,
+      shadowOffset: {
+        height: 0,
+
+      }
     },
     headerTitleStyle: {
       fontFamily: 'open-sans-bold'
@@ -34,9 +39,36 @@ const stackNavOptions = {
 
 const MealsNavigator = createStackNavigator(
   {
-    Categories: { screen: CategoriesScreen },
-    CategoryMeals: { screen: CategoryMealsScreen },
-    MealDetail: MealDetailScreen
+    Categories: {
+      screen: CategoriesScreen,
+      navigationOptions: {
+        drawerLabel: 'Meals',
+        shadowRadius: 15,
+        shadowOffset: {
+          height: 0,
+        }
+      }
+    },
+    CategoryMeals: {
+      screen: CategoryMealsScreen,
+      navigationOptions: {
+        drawerLabel: 'Meals',
+        shadowRadius: 15,
+        shadowOffset: {
+          height: 0,
+        }
+      }
+    },
+    MealDetail: {
+      screen: MealDetailScreen,
+      navigationOptions: {
+        drawerLabel: 'Meals',
+        shadowRadius: 15,
+        shadowOffset: {
+          height: 0,
+        }
+      }
+    }
   },
   { defaultNavigationOptions: stackNavOptions }
 );
@@ -107,7 +139,11 @@ const MainNavigator = createDrawerNavigator({
   {
     screen: MealsFavTabNavigator,
     navigationOptions: {
-      drawerLabel: 'Meals'
+      drawerLabel: 'Meals',
+      shadowRadius: 15,
+      shadowOffset: {
+        height: 0,
+      }
     }
   },
   Filters: FilterNavigator
