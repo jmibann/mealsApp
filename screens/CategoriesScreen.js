@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { FlatList } from 'react-native';
 
 import { CATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';

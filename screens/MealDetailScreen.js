@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyleSheet, View, Text, Button, ScrollView, Image } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
-import { MEALS } from '../data/dummy-data'
+import { useSelector } from 'react-redux';
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
 
@@ -18,9 +18,10 @@ const ListItem = (props) => {
 
 const MealDetailScreen = props => {
 
+  const availableMeals = useSelector(state => state.meals.meals);
   const mealId = props.navigation.getParam('mealId');
 
-  const selectedMeal = MEALS.find(meal => meal.id = mealId)
+  const selectedMeal = availableMeals.find(meal => meal.id = mealId);
 
   return (
     <ScrollView>
@@ -63,7 +64,6 @@ MealDetailScreen.navigationOptions = navigationData => {
     headerTitle: selectedMeal.title,
     headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
       <Item title='Favourite' iconName='ios-star' onPress={() => { console.log('mark as favourite') }} />
-      {/* <Item title='Favourite' iconName='ios-star-outline' onPress={() => { console.log('mark as favourite outline') }} /> */}
     </HeaderButtons>
   };
 };
