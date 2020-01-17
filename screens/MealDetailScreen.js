@@ -1,11 +1,13 @@
 import React, { useEffect, useCallback } from 'react';
 
-import { StyleSheet, View, Text, Button, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Text, Button, ScrollView, Image, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 import { useSelector, useDispatch } from 'react-redux';
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
-import { } from '../store/actions/meal';
+import { toggleFavourite } from '../store/actions/meal';
+
+import Colors from '../constants/Colors'
 
 const ListItem = (props) => {
   return (
@@ -69,15 +71,18 @@ const MealDetailScreen = props => {
 };
 
 MealDetailScreen.navigationOptions = navigationData => {
-  // const mealId = navigationData.navigation.getParam('mealId');
+
   const mealTitle = navigationData.navigation.getParam('mealTitle');
-  const toggleFavourite = navigationData.navigation.getParam('toggleFav')
-  // const selectedMeal = MEALS.find(meal => meal.id === mealId);
+  const toggleFavourite = navigationData.navigation.getParam('toggleFav');
+
 
   return {
+    headerStyle: {
+      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
+    },
     headerTitle: mealTitle,
-    headerRight: <HeaderButtons HeaderButtonComponent={HeaderButton}>
-      <Item title='Favourite' iconName='ios-star' onPress={toggleFavourite} />
+    headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <Item title='Favourite' iconName='ios-star' onPress={() => toggleFavourite()} />
     </HeaderButtons>,
   };
 };

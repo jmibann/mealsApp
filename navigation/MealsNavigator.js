@@ -20,11 +20,6 @@ const stackNavOptions = {
   defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
-      shadowRadius: 15,
-      shadowOffset: {
-        height: 0,
-
-      }
     },
     headerTitleStyle: {
       fontFamily: 'open-sans-bold'
@@ -37,114 +32,76 @@ const stackNavOptions = {
   }
 }
 
-const MealsNavigator = createStackNavigator(
-  {
-    Categories: {
-      screen: CategoriesScreen,
-      navigationOptions: {
-        drawerLabel: 'Meals',
-        shadowRadius: 15,
-        shadowOffset: {
-          height: 0,
-        }
-      }
-    },
-    CategoryMeals: {
-      screen: CategoryMealsScreen,
-      navigationOptions: {
-        drawerLabel: 'Meals',
-        shadowRadius: 15,
-        shadowOffset: {
-          height: 0,
-        }
-      }
-    },
-    MealDetail: {
-      screen: MealDetailScreen,
-      navigationOptions: {
-        drawerLabel: 'Meals',
-        shadowRadius: 15,
-        shadowOffset: {
-          height: 0,
-        }
-      }
+const MealsNavigator = createStackNavigator({
+  Categories: {
+    screen: CategoriesScreen,
+    navigationOptions: {
+      drawerLabel: 'Meals',
     }
   },
-  { defaultNavigationOptions: stackNavOptions }
-);
+  CategoryMeals: {
+    screen: CategoryMealsScreen,
+    navigationOptions: {
+      drawerLabel: 'Meals',
+    }
+  },
+  MealDetail: {
+    screen: MealDetailScreen,
+
+  }
+}, {
+  defaultNavigationOptions: stackNavOptions
+});
 
 
 const FavNavigator = createStackNavigator({
   Favourites: FavouritesScreen,
   MealDetail: MealDetailScreen
-},
-  { defaultNavigationOptions: stackNavOptions }
-);
+}, {
+  defaultNavigationOptions: stackNavOptions
+});
 
 const tabScreenConfig = {
   Meals: {
     screen: MealsNavigator,
     navigationOptions: {
       tabBarLabel: 'Meals',
-      tabBarIcon: (tabInfo) => {
-        return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} />
-      },
+      tabBarIcon: (tabInfo) => { return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} /> },
       tabBarColor: Colors.primaryColor,
-      tabBarLabel: Platform.OS === 'android' ? <Text style={{ fontFamily: 'open-sans-bold' }}>Meals</Text> : 'Meals'
+      tabBarLabel: Platform.OS === 'android' ? <Text style={{ fontFamily: 'open-sans-bold' }} > Meals </Text> : 'Meals'
     }
   },
   Favourites: {
     screen: FavNavigator,
     navigationOptions: {
       tabBarLabel: 'Favourites',
-      tabBarIcon: (tabInfo) => {
-        return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} />
-      },
+      tabBarIcon: (tabInfo) => { return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} /> },
       tabBarColor: Colors.primaryColor,
-      tabBarLabel: Platform.OS === 'android' ? <Text style={{ fontFamily: 'open-sans-bold' }}>Favourites</Text> : 'Favourites'
+      tabBarLabel: Platform.OS === 'android' ? <Text style={{ fontFamily: 'open-sans-bold' }} > Favourites </Text> : 'Favourites'
     }
   }
 }
 
-const MealsFavTabNavigator = Platform.OS === 'android'
-  ? createMaterialBottomTabNavigator(
-    tabScreenConfig,
-    {
-      activeColor: 'white',
-      shifting: true
-    })
-  : createBottomTabNavigator(tabScreenConfig,
-    {
-      tabBarOptions: {
-        labelStyle: {
-          fontFamily: 'open-sans-bold'
-        },
-        activeTintColor: Colors.accentColor
-      }
-    });
+const MealsFavTabNavigator = Platform.OS === 'android' ?
+  createMaterialBottomTabNavigator(tabScreenConfig, { activeColor: 'white', shifting: true }) :
+  createBottomTabNavigator(tabScreenConfig, { tabBarOptions: { labelStyle: { fontFamily: 'open-sans-bold' }, activeTintColor: Colors.accentColor } });
 
 const FilterNavigator = createStackNavigator({
   Filters: FiltersScreen,
-},
-  {
-    // navigationOptions: {
-    //   drawerLabel: 'Filters!'
-    // },
-    defaultNavigationOptions: stackNavOptions
-  })
+}, {
+  // navigationOptions: {
+  //   drawerLabel: 'Filters!'
+  // },
+  defaultNavigationOptions: stackNavOptions
+})
 
 
 const MainNavigator = createDrawerNavigator({
-  MealsFavs:
-  {
+  MealsFavs: {
     screen: MealsFavTabNavigator,
-    navigationOptions: {
-      drawerLabel: 'Meals',
-      shadowRadius: 15,
-      shadowOffset: {
-        height: 0,
-      }
-    }
+    // navigationOptions: {
+    //   drawerLabel: 'Meals',
+    // }
   },
   Filters: FilterNavigator
 }, {
